@@ -39,7 +39,7 @@
 	<div class="drawground">
 		<!-- 堆积条形图 -->
 		<div class="drawground1">
-			堆积条形图
+			<div id="fig1"></div>
 		</div>
 		<!-- 热门课程分布图 -->
 		<div class="drawground2">
@@ -61,14 +61,42 @@
 <script type="text/javascript">
 	$(function(){
 		window.setInterval(function(){settime()},1000)
+		drawatfig1()
 	})
 	
 	function settime(){
 		var tt=document.getElementById("stime");
-		tt.innerText=getdata()
+		tt.innerText=gettime()
 	}
 	
-	function getdata(){
+	function drawatfig1(){
+		var t1=document.getElementById("fig1");
+        var data=getdata1();
+		console.log(data);
+		var data1=data["搜索引擎"]
+		console.log(data1);
+		// data2=data.staffDist
+		// console.log(data2);
+		t1.innerText=data1
+	}
+	
+	function getdata1(){
+		var _url="/datafig1";
+		var xmlhttp; 
+		if (window.XMLHttpRequest)
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari 
+		  xmlhttp=new XMLHttpRequest(); 
+		  } 
+		else 
+		  {// code for IE6, IE5 
+		  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP"); 
+		  }
+		xmlhttp.open("GET",_url,false)
+		xmlhttp.send()
+		return xmlhttp.responseText
+	}
+	
+	function gettime(){
 		var _url="/ptime";
 		var xmlhttp; 
 		if (window.XMLHttpRequest) 
@@ -79,7 +107,7 @@
 		  {// code for IE6, IE5 
 		  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP"); 
 		  }
-		xmlhttp.open("GET","/ptime",false)
+		xmlhttp.open("GET",_url,false)
 		xmlhttp.send()
 		return xmlhttp.responseText;
 	}
