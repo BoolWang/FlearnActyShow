@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>学员活跃度看板</title>
-	<link rel="stylesheet" type="text/css" href="../static/index.css"/>
+	<link rel="stylesheet" type="text/css" href="../static/css/index.css">
 </head>
 <body>
 <div class="container">
 	<!-- 头部标题 -->
 	<div class="header">
 		<h1>富学宝典学员活跃度看板</h1>
+		<!-- <tim>时间</tim> -->
 	</div>
+	<!-- 时间 -->
 	<!--菜单 -->
 	<div id="menu" class="menu">
 		<div class="menu1">菜单1</div>
@@ -25,8 +27,12 @@
 		<p>起始时间：<input type="month" value="2015-09"/>  结束时间：<input type="month" value="2015-09"/></p>
 	</div>
 	<div class="select1">
-		<p>请选择要查看的时间段：</p>
-		<p>起始时间：<input type="month" value="2015-09"/>  结束时间：<input type="month" value="2015-09"/></p>
+		<p>
+			<span class='unit-label'>当前时间：</span>
+			<span class='value-num'>
+			<span id="stime" class="declare" data-name='stime'></span>
+			</span>
+		</p>
 	</div>
 	</div>
 	<!-- 图形展示部分 -->
@@ -50,4 +56,32 @@
 	</div>
 </div>
 </body>
+<script src="../static/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="../static/js/echarts-all.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	$(function(){
+		window.setInterval(function(){settime()},1000)
+	})
+	
+	function settime(){
+		var tt=document.getElementById("stime");
+		tt.innerText=getdata()
+	}
+	
+	function getdata(){
+		var _url="/ptime";
+		var xmlhttp; 
+		if (window.XMLHttpRequest) 
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari 
+		  xmlhttp=new XMLHttpRequest(); 
+		  } 
+		else 
+		  {// code for IE6, IE5 
+		  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP"); 
+		  }
+		xmlhttp.open("GET","/ptime",false)
+		xmlhttp.send()
+		return xmlhttp.responseText;
+	}
+</script>
 </html>
