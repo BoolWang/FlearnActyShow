@@ -1,47 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="../static/css/calendar.css">
-    <script src="../static/js/moment.main.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
-    <script src="../static/js/es6.js"></script>
+    <meta charset="UTF-8">
+    <title>测试页面</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/index.css">
 </head>
 <body>
-	<input type="text" placeholder="Date picker" id="singleDateRange"> 
+	<!-- 可变变量控制测试 -->
+	<p id="t1"></p>
+	<!-- ajax从flask传参测试 -->
+	<p>
+		<span>时间显示：</span>
+		<span id="t2"></span>
+	</p>
 </body>
+
+<script src="../static/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script src="../static/js/echarts-all.js" type="text/javascript" charset="utf-8"></script>
+<script src="../static/js/drawfig1.js" type="text/javascript" charset="UTF-8"></script>
 <script type="text/javascript">
-	$('#singleDateRange').DatePicker({
-	  startDate: moment()
-	});
-	$('#rangedate').DatePicker({
-	  type: 'rangedate',
-	  startDate: moment().subtract(1, 'week'),
-	  endDate: moment(),
-	  ranges: [{
-	    label: "Yesterday",
-	    startDate: moment().subtract(1, 'day'),
-	    endDate: moment().subtract(1, 'day')
-	  }, {
-	    label: 'Sunday',
-	    startDate: moment().startOf('week'),
-	    endDate: moment()
-	  }, {
-	    label: '2 Weeks',
-	    startDate: moment().startOf('week').subtract(1, 'week'),
-	    endDate: moment()
-	  }, {
-	    label: 'This Month',
-	    startDate: moment().startOf('month'),
-	    endDate: moment()
-	  }, {
-	    label: 'Last Month',
-	    startDate: moment().startOf('month').subtract(1, 'month'),
-	    endDate: moment().startOf('month')
-	  }, {
-	    label: 'This Year',
-	    startDate: moment().startOf('year'),
-	    endDate: moment().startOf('moth')
-	  }]
-	});         
+	$(function(){
+		var t1=document.getElementById("t1")
+		t1.innerText="这是可变变量控制测试"
+		var t2=document.getElementById("t2")
+		t2.innerText=gettext()
+	})
+	
+	function gettext(){
+		var _url="/ptime";
+		var xmlhttp; 
+		if (window.XMLHttpRequest) 
+		  {// code for IE7+, Firefox, Chrome, Opera, Safari 
+		  xmlhttp=new XMLHttpRequest(); 
+		  } 
+		else 
+		  {// code for IE6, IE5 
+		  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP"); 
+		  }
+		xmlhttp.open("GET",_url,false)
+		xmlhttp.send()
+		return xmlhttp.responseText;
+	}
 </script>
-</html>
