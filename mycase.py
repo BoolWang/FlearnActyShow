@@ -10,12 +10,26 @@ app.config['JSON_AS_ASCII'] = False
 def index():
     return render_template('index.html')
 
+#打开test.html页面，运行本python程序后在本地浏览器输入http://127.0.0.1:5000/test即可打开	
+@app.route('/test')
+def test():
+	return render_template('test.html')
+	
+#打开drawtest.html页面，运行本python程序后在本地浏览器输入http://127.0.0.1:5000/drawtest即可打开	
+@app.route('/drawtest')
+def drawtest():
+	return render_template('drawtest.html')
+
 
 @app.route('/ptime')
 def get():
     str1=datetime.datetime.today()
     str2=str1.strftime("%Y-%m-%d %X")
     return str2
+	
+@app.route('/settext')	
+def settext():
+	return "ajax从flask传参测试"
 
 @app.route('/datafig1',methods=["GET","POST"])
 def setdata1():
