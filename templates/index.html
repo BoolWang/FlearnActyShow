@@ -39,7 +39,7 @@
 	<div class="drawground">
 		<!-- 堆积条形图 -->
 		<div class="drawground1">
-			<div id="fig1"></div>
+			<div id="fig1" style="width: 100%;height: 100%;"></div>
 		</div>
 		<!-- 热门课程分布图 -->
 		<div class="drawground2">
@@ -58,10 +58,20 @@
 </body>
 <script src="../static/js/jquery.js" type="text/javascript" charset="utf-8"></script>
 <script src="../static/js/echarts-all.js" type="text/javascript" charset="utf-8"></script>
+<script src="../static/js/drawfig1.js" type="text/javascript" charset="UTF-8"></script>
 <script type="text/javascript">
 	$(function(){
-		window.setInterval(function(){settime()},1000)
-		drawatfig1()
+		window.setInterval(function(){settime()},60000);
+		// var timeList=getTimeList();
+		// var leve1=getLeve1();
+		// var leve2=getLeve2();
+		// var leve3=getLeve3();
+		// var leve4=getLeve4();
+		var data=getdata1()
+		console.log(data);
+		// var t1=document.getElementById("fig1")
+		// t1.innerText=data["TimeList"]
+		optionfig1(data)
 	})
 	
 	function settime(){
@@ -69,21 +79,10 @@
 		tt.innerText=gettime()
 	}
 	
-	function drawatfig1(){
-		var t1=document.getElementById("fig1");
-        var data=getdata1();
-		console.log(data);
-		var data1=data["搜索引擎"]
-		console.log(data1);
-		// data2=data.staffDist
-		// console.log(data2);
-		t1.innerText=data1
-	}
-	
 	function getdata1(){
-		var _url="/datafig1";
-		var xmlhttp; 
-		if (window.XMLHttpRequest)
+		var _url="/datafig1"
+		var xmlhttp;
+		if (window.XMLHttpRequest) 
 		  {// code for IE7+, Firefox, Chrome, Opera, Safari 
 		  xmlhttp=new XMLHttpRequest(); 
 		  } 
@@ -93,8 +92,10 @@
 		  }
 		xmlhttp.open("GET",_url,false)
 		xmlhttp.send()
-		return xmlhttp.responseText
+		var data=xmlhttp.responseText
+		return JSON.parse(data)
 	}
+	
 	
 	function gettime(){
 		var _url="/ptime";
@@ -110,6 +111,80 @@
 		xmlhttp.open("GET",_url,false)
 		xmlhttp.send()
 		return xmlhttp.responseText;
+	}
+	function optionfig1(dataDic){
+		var dom=document.getElementById("fig1")
+		var myChart=echarts.init(dom)
+		var option = {
+		    tooltip: {
+		        trigger: 'axis',
+		        axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+		            type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+		        }
+		    },
+		    legend: {
+		        data: ['Acty in [2.5,5)', 'Acty in [5,25)', 'Acty in [25,50)', 'Acty in [50,∞)']
+		    },
+		    grid: {
+		        left: '3%',
+		        right: '4%',
+		        bottom: '3%',
+		        containLabel: true
+		    },
+		    yAxis: {
+		        type: 'value'
+		    },
+		    xAxis: {
+		        type: 'category',
+		        data: dataDic["TimeList"]     //此处显示月份，即横坐标范围
+		    },
+			// 接下来填写每一个活跃度等级的数据，每月一个
+		    series: [
+		        {
+		            name: 'Acty in [2.5,5)',
+		            type: 'bar',
+		            stack: '总量',
+		            label: {
+		                show: true,
+		                position: 'insideRight'
+		            },
+		            data:dataDic["lv1"]
+		        },
+		        {
+		            name: 'Acty in [5,25)',
+		            type: 'bar',
+		            stack: '总量',
+		            label: {
+		                show: true,
+		                position: 'insideRight'
+		            },
+		            data:dataDic["lv2"]
+		        },
+		        {
+		            name: 'Acty in [25,50)',
+		            type: 'bar',
+		            stack: '总量',
+		            label: {
+		                show: true,
+		                position: 'insideRight'
+		            },
+		            data:dataDic["lv3"]
+		        },
+		        {
+		            name: 'Acty in [50,∞)',
+		            type: 'bar',
+		            stack: '总量',
+		            label: {
+		                show: true,
+		                position: 'insideRight'
+		            },
+		            data:dataDic["lv4"]
+		        },
+		    ]
+		};
+		if (option && typeof option === "object") {
+		    myChart.setOption(option, true);
+		}
 	}
 </script>
 </html>

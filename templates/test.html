@@ -1,10 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/calendar.css">
+    <script src="../static/js/moment.main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+    <script src="../static/js/es6.js"></script>
 </head>
 <body>
-hello
+	<input type="text" placeholder="Date picker" id="singleDateRange"> 
 </body>
+<script type="text/javascript">
+	$('#singleDateRange').DatePicker({
+	  startDate: moment()
+	});
+	$('#rangedate').DatePicker({
+	  type: 'rangedate',
+	  startDate: moment().subtract(1, 'week'),
+	  endDate: moment(),
+	  ranges: [{
+	    label: "Yesterday",
+	    startDate: moment().subtract(1, 'day'),
+	    endDate: moment().subtract(1, 'day')
+	  }, {
+	    label: 'Sunday',
+	    startDate: moment().startOf('week'),
+	    endDate: moment()
+	  }, {
+	    label: '2 Weeks',
+	    startDate: moment().startOf('week').subtract(1, 'week'),
+	    endDate: moment()
+	  }, {
+	    label: 'This Month',
+	    startDate: moment().startOf('month'),
+	    endDate: moment()
+	  }, {
+	    label: 'Last Month',
+	    startDate: moment().startOf('month').subtract(1, 'month'),
+	    endDate: moment().startOf('month')
+	  }, {
+	    label: 'This Year',
+	    startDate: moment().startOf('year'),
+	    endDate: moment().startOf('moth')
+	  }]
+	});         
+</script>
 </html>

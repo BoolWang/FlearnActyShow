@@ -1,0 +1,88 @@
+html,body{
+   margin:0;
+   padding:0;
+   height:100%;
+ }
+ .container{
+    height: 100%;
+    /* background-image: url(../img/bg2.png) ; */
+    background-size: 100% 100%;
+  }
+  .header{
+    height: 10%;
+    color: white;
+    /* background-image: url(../img/title.png); */
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+	background-color:black;	
+  }
+ .header h1{
+    padding-top: 8px;
+    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin-top: 0;
+    text-align: center;
+	/* height:75% */
+  }
+  .header tim{
+	  float: right;
+	 /* height: 20%; */
+  }
+  .content{
+    width: 1280px;
+    margin: 0 auto;    
+    overflow-x:hidden;
+    overflow-y: auto;
+   
+  }
+  .menu{
+	height:4%;
+	width:100%;
+	background-color:aqua;
+  }
+  .menu1{
+	/* border:2px solid black; */
+    float: left;
+    width: 25%;
+	height: 100%;
+	background-color: gray;
+	text-align: center;
+  }
+  .select{
+	height: 12%;
+	/* border: 2px solid red; */
+	background-color: antiquewhite;
+  }
+  .select1{
+	float: left;
+	width: 50%;
+  }
+  .drawground{
+	height: 50%;
+	/* border: 2px solid red; */
+	background-color: #808080;
+  }
+  .drawground1{
+	/* border: 2px solid black; */
+	float: left;
+	width: 60%;
+	height: 100%;
+	background-color: aqua;
+	}
+  .drawground2{
+	/* border: 2px solid black; */
+  	float: left;
+  	width: 40%;
+	height: 100%;
+	background-color:blanchedalmond;
+  }
+  .outdata{
+	height: 20%;
+	background-color:cadetblue;
+	/* border: 2px solid red; */
+  }
+  .bottom{
+	height: 4%;
+	background-color: darkorange;
+  }
